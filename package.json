@@ -19,7 +19,10 @@
     "format": "npm run format:eslint && npm run format:prettier",
     "clean": "rimraf bundle.js && rimraf assets && npm run build",
     "prepare": "npm run build:production",
-    "osd": "rollup -c osd.rollup.config.js"
+    "osd": "rollup -c osd.rollup.config.js",
+    "storybook": "npm run analyze 6& start-storybook --node-resolve --watch --open",
+    "analyze": "web-component-analyzer src --format json --outFile custom-elements.json",
+    "storybook:build": "build-storybook"
   },
   "author": "Wolfgang Meier",
   "license": "GPL-3.0-or-later",
@@ -59,6 +62,7 @@
     "web-animations-js": "^2.3.2"
   },
   "devDependencies": {
+    "@open-wc/demoing-storybook": "^1.3.10",
     "@open-wc/eslint-config": "^1.0.0",
     "@open-wc/prettier-config": "^0.1.10",
     "@open-wc/testing": "^2.3.3",
@@ -76,7 +80,8 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-copy": "^3.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-terser": "^5.1.2"
+    "rollup-plugin-terser": "^5.1.2",
+    "web-component-analyzer": "^1.0.0"
   },
   "eslintConfig": {
     "extends": [

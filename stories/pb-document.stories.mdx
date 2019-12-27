@@ -1,0 +1,53 @@
+import { Story, Preview, Meta, Props, withKnobs, withWebComponentsKnobs } from '@open-wc/demoing-storybook';
+import { html } from 'lit-html';
+import '../src/pb-components.js';
+
+<Meta title="Core|pb-view" 
+    decorators={[withKnobs, withWebComponentsKnobs]}
+    parameters={{ component: 'pb-view', options: { selectedPanel: 'storybookjs/knobs/panel' } }}
+/>
+
+# View content transformed via ODD
+
+`pb-view` is the most important component in TEI Publisher: it provides the actual text view by 
+transforming a part or all of the source XML into HTML based on the processing model instructions 
+in the ODD. Because webcomponents are all about encapsulation, pb-view ensures that the styling 
+of the text as governed by the ODD will be confined within the boundaries of the component. 
+This makes it possible to display two completely heterogenous texts (like the documentation 
+and Kant's Kritik) on the same page without styles getting messed up.
+
+## Single pb-view element
+
+<Preview withToolbar>
+  <Story name="Simple" height="220px">
+    {html`
+      <pb-page endpoint="http://localhost:8080/exist/apps/tei-publisher">
+        <pb-document id="document1" path="test/kant_rvernunft_1781.TEI-P5.xml" odd="dta"></pb-document>
+        <pb-view id="view1" src="document1" view="page" append-footnotes></pb-view>
+      </pb-page>
+    `}
+  </Story>
+</Preview>
+
+## Multiple pb-view showing different content
+
+<Preview withToolbar>
+  <Story name="Multi" height="420px">
+    {html`
+      <pb-page endpoint="http://localhost:8080/exist/apps/tei-publisher">
+        <pb-document id="document1" path="test/kant_rvernunft_1781.TEI-P5.xml" odd="dta"></pb-document>
+        <pb-document id="document2" path="doc/documentation.xml" odd="docbook" view="div"></pb-document>
+        <main>
+            <pb-view src="document1" view="page" append-footnotes></pb-view>
+            <pb-view src="document2" append-footnotes></pb-view>
+        </main>
+      </pb-page>
+    `}
+  </Story>
+</Preview>
+
+## API
+
+The api table will show the data of "demo-wc-card" in your `custom-elements.json`.
+
+<Props of="pb-view" />
