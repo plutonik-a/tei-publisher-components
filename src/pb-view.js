@@ -638,7 +638,8 @@ export class PbView extends pbMixin(LitElement) {
         if (!this.disableHistory && this.xmlId && !this.map) {
             //this.setParameter('root', this.nodeId);
             this.setParameter('id', this.xmlId);
-            this.pushHistory('Navigate to xml:id');
+            this.pushHistory({}, '');
+            console.log('calling _handleContent and pushHistory')
         }
         this.xmlId = null;
 
@@ -929,26 +930,33 @@ export class PbView extends pbMixin(LitElement) {
     navigate(direction) {
         this.lastDirection = direction;
 
+        window.onpopstate = function(event) {
+            console.log("location: " + document.location + ", state: " + JSON.stringify(event.state));
+        };
+
         if (direction === 'backward') {
             if (this.previous) {
                 if (!this.disableHistory && !this.map) {
                     if (this.previousId) {
-                        this.setParameter('id', this.previousId);
+                        this.setParameter('id', '');
+                        console.log('next page ->, id=', this.previousId)
                     } else {
                         this.setParameter('root', this.previous);
                     }
-                    this.pushHistory('Navigate backward');
+                    this.pushHistory({}, '');
                 }
                 this._load(this.previous, direction);
             }
         } else if (this.next) {
             if (!this.disableHistory && !this.map) {
+
                 if (this.nextId) {
                     this.setParameter('id', this.nextId);
+                    console.log('next page ->, id=', this.nextId)
                 } else {
                     this.setParameter('root', this.next);
                 }
-                this.pushHistory('Navigate forward');
+                this.pushHistory({}, '');
             }
             this._load(this.next, direction);
         }

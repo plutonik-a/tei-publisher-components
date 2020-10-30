@@ -490,8 +490,9 @@ export const pbMixin = (superclass) => class PbMixin extends superclass {
         return TeiPublisher.url;
     }
 
-    pushHistory(msg, state) {
-        history.pushState(state, msg, TeiPublisher.url.toString());
+    pushHistory(state, title) {
+        history.pushState(state, title, TeiPublisher.url.toString());
+        console.log('URL=', TeiPublisher.url.toString())
     }
 
     getEndpoint() {
