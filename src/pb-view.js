@@ -532,7 +532,7 @@ export class PbView extends pbMixin(LitElement) {
     _doLoad(params) {
         this.emitTo('pb-start-update', params);
 
-        console.log("<pb-view> Loading view with params %o", params);
+        //console.log("<pb-view> Loading view with params %o", params);
         if (!this.infiniteScroll) {
             this._clear();
         }

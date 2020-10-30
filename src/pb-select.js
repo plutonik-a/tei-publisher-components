@@ -141,7 +141,7 @@ export class PbSelect extends pbMixin(LitElement) {
             } else {
                 url = `${url}?${this._getParameters()}`;
             }
-            console.log('<pb-select> loading items from %s', url);
+            //console.log('<pb-select> loading items from %s', url);
             fetch(url, {
                 method: 'GET',
                 mode: 'cors',
@@ -154,7 +154,7 @@ export class PbSelect extends pbMixin(LitElement) {
                     json.forEach((item) => {
                         items.push({label: item.text, value: item.value});
                     });
-                    console.log('<pb-select> loaded %d items', items.length);
+                    //console.log('<pb-select> loaded %d items', items.length);
                     this._items = items;
                 })
                 .catch(() => {

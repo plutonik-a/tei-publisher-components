@@ -72,7 +72,7 @@ class PbDocument extends pbMixin(LitElement) {
     attributeChangedCallback(name, oldVal, newVal) {
         super.attributeChangedCallback(name, oldVal, newVal);
         if (oldVal) {
-            console.log('<pb-document> Emit update event');
+            //console.log('<pb-document> Emit update event');
             this.emitTo('pb-document', this);
         }
     }
